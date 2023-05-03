@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../parts/head'); %>
+  </head>
+  <body>
+    <header class="header"><%- include('../parts/header'); %></header>
+    <main>
+      <section class="section3 sections-padding">
+        <div class="container">
+          <h2 class="secondary-header visually-hidden">Our Clients</h2>
+          <ul class="section3-list list sections-list">
+            <% teamMembers.forEach(teamMember => { %>
+            <li class="section3-item">
+              <picture>
+                <source
+                  media="(min-width: 1200px)"
+                  srcset="
+                    /img/desktop/<%= teamMember.image_name %>@1x.webp 1x,
+                    /img/desktop/<%= teamMember.image_name %>@1x.webp 2x
+                  "
+                  type="image/webp"
+                />
+                <source
+                  media="(min-width: 1200px)"
+                  srcset="
+                    /img/desktop/<%= teamMember.image_name %>@1x.jpg 1x,
+                    /img/desktop/<%= teamMember.image_name %>@2x.jpg 2x
+                  "
+                  type="image/jpg"
+                />
+                <img
+                  class="section3-image"
+                  src="/img/desktop/<%= teamMember.image_name %>@1x.jpg"
+                  alt="Italo Melo's photo"
+                  width="234"
+                  height="230"
+                  loading="lazy"
+                />
+              </picture>
+              <div class="text-about-team">
+                <h2 class="section-subtitle">
+                  <%= teamMember.team_member_name %>
+                </h2>
+                <p class="main-text section3-text-margin">
+                  <%= teamMember.company_name%>
+                </p>
+                <ul class="socials-links-list sections-list list">
+                  <li class="socials-links-item">
+                    <a
+                      href="https://gmail.com"
+                      rel="noopener noreferrer"
+                      class="socials-links"
+                    >
+                      <svg class="socials-icon" width="14" height="14">
+                        <use href="/icons.svg#icon-mail"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials-links-item">
+                    <a
+                      href="https://facebook.com"
+                      rel="noopener noreferrer"
+                      class="socials-links"
+                    >
+                      <svg class="socials-icon" width="14" height="14">
+                        <use href="/icons.svg#icon-facebook"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials-links-item">
+                    <a
+                      href="https://linkedin.com"
+                      rel="noopener noreferrer"
+                      class="socials-links"
+                    >
+                      <svg class="socials-icon" width="14" height="14">
+                        <use href="/icons.svg#icon-linkedin"></use>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <% }); %>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

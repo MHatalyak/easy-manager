@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../parts/head'); %>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          initialDate: '2023-04-12',
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay',
+          },
+
+          navLinks: true, // can click day/week names to navigate views
+          editable: true,
+          // allow "more" link when too many
+          events: [
+            {
+              title: 'All Day Event',
+              start: '2023-04-01',
+            },
+            {
+              title: 'Long Event',
+              start: '2023-04-07',
+              end: '2023-04-10',
+            },
+            {
+              groupId: '999',
+              title: 'Repeating Event',
+              start: '2023-04-09T16:00:00',
+            },
+            {
+              groupId: '999',
+              title: 'Repeating Event',
+              start: '2023-04-16T16:00:00',
+            },
+            {
+              title: 'Conference',
+              start: '2023-04-11',
+              end: '2023-04-13',
+            },
+            {
+              title: 'Meeting',
+              start: '2023-04-12T10:30:00',
+              end: '2023-04-12T12:30:00',
+            },
+            {
+              title: 'Lunch',
+              start: '2023-04-12T12:00:00',
+            },
+            {
+              title: 'Meeting',
+              start: '2023-04-12T14:30:00',
+            },
+            {
+              title: 'Birthday Party',
+              start: '2023-04-13T07:00:00',
+            },
+            {
+              title: 'Click for Google',
+              url: 'http://google.com/',
+              start: '2023-04-28',
+            },
+          ],
+          eventColor: '#4d5ae5',
+          //   eventClick: function (info) {
+          //     swal({
+          //       title: info.event.title,
+          //       text:
+          //         'Start From : ' +
+          //         moment(info.event.start).format('MMMM Do YYYY, h:mm a'),
+          //       icon: 'success',
+          //     });
+          //   },
+          // });
+          // var btnGroup = document.querySelector('.fc-right .fc-button-group');
+          // var newInput = document.createElement('div');
+          // newInput.className = 'input-group datetimepicker';
+          // newInput.innerHTML =
+          //   '<input type="text" class="form-control fc-datepicker" placeholder="YYYY-MM-DD" style="padding: 0;width: 0;border: none;margin: 0;">';
+          // btnGroup.appendChild(newInput);
+          // var datepicker = document.querySelector('.fc-datepicker');
+          // $(datepicker).datepicker({
+          //   dateFormat: 'yy-mm-dd',
+          //   showOn: 'button',
+          //   buttonText:
+          //     '<span class="input-group-addon"><i class="fas fa-calendar-alt"></i></span>',
+        });
+
+        calendar.render();
+      });
+    </script>
+  </head>
+  <body>
+    <header class="header"><%- include('../parts/header'); %></header>
+    <main>
+      <section class="section3 sections-padding">
+        <div class="ui container">
+          <div class="ui grid">
+            <div class="ui sixteen column">
+              <div id="calendar"></div>
+              <!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.0/main.min.js"></script>
+              <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  var calendarEl = document.getElementById('calendar');
+                  var calendar = new FullCalendar.Calendar(calendarEl, {
+                    plugins: [
+                      FullCalendar.dayGridPlugin,
+                      FullCalendar.timeGridPlugin,
+                      FullCalendar.listPlugin,
+                    ],
+                    header: {
+                      left: 'prev,next today',
+                      center: 'title',
+                      right: 'month,basicWeek,basicDay',
+                    },
+                    defaultDate: '2016-12-12',
+                    navLinks: true, // can click day/week names to navigate views
+                    editable: true,
+                    eventLimit: true, // allow "more" link when too many events
+                    events: [
+                      {
+                        title: 'All Day Event',
+                        start: '2016-12-01',
+                      },
+                      {
+                        title: 'Long Event',
+                        start: '2016-12-07',
+                        end: '2016-12-10',
+                      },
+                      {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: '2016-12-09T16:00:00',
+                      },
+                      {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: '2016-12-16T16:00:00',
+                      },
+                      {
+                        title: 'Conference',
+                        start: '2016-12-11',
+                        end: '2016-12-13',
+                      },
+                      {
+                        title: 'Meeting',
+                        start: '2016-12-12T10:30:00',
+                        end: '2016-12-12T12:30:00',
+                      },
+                      {
+                        title: 'Lunch',
+                        start: '2016-12-12T12:00:00',
+                      },
+                      {
+                        title: 'Meeting',
+                        start: '2016-12-12T14:30:00',
+                      },
+                      {
+                        title: 'Happy Hour',
+                        start: '2016-12-12T17:30:00',
+                      },
+                      {
+                        title: 'Dinner',
+                        start: '2016-12-12T20:00:00',
+                      },
+                      {
+                        title: 'Birthday Party',
+                        start: '2016-12-13T07:00:00',
+                      },
+                      {
+                        title: 'Click for Google',
+                        url: 'https://google.com/',
+                        start: '2016-12-28',
+                      },
+                    ],
+                  });
+
+                  calendar.render();
+                });
+              </script> -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

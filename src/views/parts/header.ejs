@@ -1,0 +1,64 @@
+<div class="container header-container">
+  <nav class="header-nav header-container">
+    <a class="icon-link icon-header link header-paddings" href="#"
+      ><span class="icon-link-web">Easy</span>Manager</a
+    >
+    <ul class="header-list list header-container">
+      <li class="header-item">
+        <a
+          class="menu-link link header-paddings <%= currentPage === 'template' ? 'menu-link-selected' : '' %>"
+          href="/template"
+          >OrgTree</a
+        >
+      </li>
+      <li class="header-item">
+        <a
+          class="menu-link link header-paddings <%= currentPage === 'projects' ? 'menu-link-selected' : '' %>"
+          href="/projects"
+          >Projects</a
+        >
+      </li>
+      <li class="header-item">
+        <a
+          class="menu-link link header-paddings <%= currentPage === 'clients' ? 'menu-link-selected' : '' %>"
+          href="/clients"
+          >Clients</a
+        >
+      </li>
+      <li class="header-item">
+        <a
+          class="menu-link link header-paddings <%= currentPage === 'learnings' ? 'menu-link-selected' : '' %>"
+          href="/learnings"
+          >Learnings</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <div class="header-item header-profile">
+    <ul class="header-list list header-container">
+      <!-- <li>
+        <a
+          class="menu-link link header-paddings profile-margin<%= currentPage === 'profile' ? 'menu-link-selected' : '' %>"
+          href="/profile"
+          onclick="window.location.href='/profile'"
+          >Profile</a
+        >
+      </li> -->
+      <li>
+        <a
+          class="menu-link link header-paddings <%= currentPage === 'calendar' ? 'menu-link-selected' : '' %>"
+          href="/calendar"
+          >Calendar</a
+        >
+      </li>
+      <li class="profile-margin">
+        <a
+          class="menu-link link header-paddings <%= currentPage === 'profile' ? 'menu-link-selected' : '' %>"
+          href="/profile"
+          onclick="window.location.href='/profile'"
+          >Profile</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

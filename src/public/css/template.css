@@ -1,0 +1,61 @@
+/* html,
+body {
+  overflow: hidden;
+}
+#tree {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.chart-menu {
+  border-width: 10px !important;
+  border-color: #aeaeae !important;
+  border: 1px solid #aeaeae !important;
+}
+
+[data-item] {
+  border-width: 0px !important;
+  padding: 20px !important;
+}
+
+[data-tlbr] {
+  margin: 20px !important;
+}
+
+[data-tlbr='layout'] {
+  transform: rotate(0deg) translateX(0px) translateY(0px) !important;
+}
+
+.shadow {
+  -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.25));
+} */
+/* .personDescription {
+  background-color: #eeeeee;
+  padding: 6px;
+  border-radius: 6px;
+  margin-top: -4px;
+}
+
+.tooltipBox {
+  background-color: #666666;
+  color: white;
+  border-radius: 4px;
+  padding: 4px;
+} */
+
+#tree {
+  width: 100%;
+  height: 100%;
+}
+[data-n-id] rect {
+  fill: var(--btn-bg-color);
+}
+.boc-edit-form .boc-edit-form-header,
+.boc-edit-form .boc-img-button {
+  background-color: var(--btn-bg-color) !important;
+}
+.boc-edit-form .boc-img-button:hover {
+  background-color: var(--accent-color) !important;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../parts/head'); %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  </head>
+  <body>
+    <main>
+      <section class="login-section sections-padding">
+        <div class="container login-container" onclick="onclick">
+          <!-- <div class="box">
+            <div class="form">
+              <h2 class="login-header">Log in</h2>
+              <div class="input-box">
+                <input type="text" name="user_email" required="required" />
+                <span class="login_input">Email</span>
+                <i></i>
+              </div>
+              <div class="input-box">
+                <input
+                  type="password"
+                  name="user_password"
+                  required="required"
+                />
+                <span class="login_input">Password</span>
+                <i></i>
+              </div>
+              <input type="submit" value="Login" />
+            </div> -->
+
+          <div class="top"></div>
+          <div class="bottom"></div>
+          <div class="box">
+            <div class="center">
+              <form action="/login" method="POST" class="form">
+                <!-- <div class="form"> -->
+                <!-- <input type="email" placeholder="Email" /><input
+              type="password"
+              placeholder="Password"
+            />
+            <h2>&nbsp;</h2> -->
+                <div class="input-box">
+                  <h2 class="login-header">Log in</h2>
+                  <input
+                    type="email"
+                    name="email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    required
+                  />
+                  <span class="login_input">Email</span>
+                  <i></i>
+                </div>
+                <div class="input-box">
+                  <input type="password" name="password" required />
+                  <span class="login_input">Password</span>
+                  <i></i>
+                </div>
+                <button class="modal-form-btn hero-btn" type="submit">
+                  Login
+                </button>
+                <!-- </div> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

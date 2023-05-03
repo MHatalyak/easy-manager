@@ -1,0 +1,51 @@
+@import url('./reset.css');
+@import url('./header.css');
+@import url('./vite-promo.css');
+
+@import url('./common.css');
+@import url('./components.css');
+@import url('./tree.css');
+@import url('./projects.css');
+@import url('./clients.css');
+@import url('./learnings.css');
+@import url('./profile.css');
+@import url('./template.css');
+@import url('./login.css');
+@import url('./calendar.css');
+
+:root {
+  --primary-font: 'Roboto', sans-serif;
+  --secondary-font: 'Raleway', sans-serif;
+  --letter-space: 0.02em;
+  --primary-color: #2e2f42;
+  --secondary-color: #434455;
+  --primary-bg-color: #2e2f42;
+  --secondary-bg-color: #f4f4fd;
+  --accent-color: #404bbf;
+  --btn-bg-color: #4d5ae5;
+  --white-color: #ffffff;
+  --black-color: #000000;
+  --footer-text-color: #e7e9fc;
+  --valid-fields: #31d0aa;
+  --section4-icons-color: #8e8f99;
+  --modal-bg-color: #fcfcfc;
+  --black-modal-close: rgba(0, 0, 0, 0.1);
+  --modal-form-desc: #757575;
+  --learnings-bg-color: #8a94ff;
+  --profile-after: #e0e0e0;
+
+  --purple: #555db9;
+  --purple2: #6b77ff;
+  --purple3: #3d4387;
+  --purple4: #8690f4;
+  --bright-purple: #0c1465;
+  --project-purple: #949adf;
+
+  --blue: rgba(79, 192, 210, 1);
+  --green: rgba(82, 210, 154, 1);
+  --yellow: rgba(152, 115, 29, 0.7);
+  --orange: rgba(235, 118, 85, 1);
+  --projects-text: rgba(0, 0, 0, 0.9);
+
+  --trans-descrp: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}

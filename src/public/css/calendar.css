@@ -1,0 +1,40 @@
+#calendar {
+  max-width: 1100px;
+  margin: 40px auto;
+}
+
+/* .hoverEffect {
+  font-size: 29px;
+  position: absolute;
+  margin: 30px 55px;
+  cursor: pointer;
+}
+.ui-datepicker-trigger {
+  background: transparent;
+  border: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.datetimepicker .input-group-addon {
+  background-color: #f9f9f9;
+  border-radius: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  cursor: pointer;
+  height: 2.1em;
+  border: 1px solid #ccc;
+}
+.fc-state-default.fc-corner-right {
+  border-radius: 0px;
+} */
+
+.fc .fc-button-primary {
+  background-color: var(--purple);
+  border-color: var(--accent-color);
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:hover.fc-button-active,
+.fc .fc-button-primary:not(:disabled):active,
+.fc .fc-button-primary:not(:disabled):hover {
+  background-color: var(--accent-color);
+}

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../parts/head'); %>
+  </head>
+  <body>
+    <header class="header"><%- include('../parts/header'); %></header>
+    <main>
+      <!-- <section class="section_projects sections-padding wrapper"> -->
+      <section class="sections-padding wrapper">
+        <div class="container project_container">
+          <!-- Row title -->
+          <main class="row title">
+            <ul>
+              <li class="project_table_title">Project</li>
+              <li class="project_table_title">Project Manager</li>
+              <li class="project_table_title">Client</li>
+              <li class="project_table_title">Direction</li>
+              <li class="project_table_title">Status</li>
+            </ul>
+          </main>
+          <!-- Row 1 - fadeIn -->
+          <!-- <section class="row-fadeIn-wrapper"> -->
+          <% projects.forEach(project => { %>
+          <article class="row nfl">
+            <ul>
+              <li>
+                <a class="project_name" href="#"><%= project.project_name %></a>
+              </li>
+              <li>
+                <a
+                  class="link text-hover"
+                  href="/profile/<%= project.project_manager %>"
+                >
+                  <%= project.project_manager %>
+                </a>
+              </li>
+              <li><%= project.client %></li>
+              <li><%= project.direction %></li>
+              <li><%= project.status %></li>
+            </ul>
+            <ul class="more-content">
+              <li class="more_content_desc">
+                <%= project.description %>
+                <ul class="team_members_project">
+                  <li class="team_members_project_item" style="padding-left: 0">
+                    Team:
+                  </li>
+                  <% project.team_members.forEach(function(teamMember) { %>
+                  <li>
+                    <a
+                      class="details-text project_name"
+                      href="/profile/<%= teamMember %>"
+                    >
+                      <%= teamMember %>
+                    </a>
+                  </li>
+                  <% }); %>
+                </ul>
+              </li>
+            </ul>
+          </article>
+          <% }); %>
+          <!-- </section> -->
+          <!-- Row 2 - fadeOut -->
+          <!-- <section class="row-fadeOut-wrapper"> -->
+          <!-- <article class="row nfl">
+            <ul>
+              <li>
+                <a class="project_name" href="#">NFL</a
+                ><span class="small">(fadeOut)</span>
+              </li>
+              <li><a class="link text-hover" href="#">Project Manager</a></li>
+              <li>MarketPlace</li>
+              <li>Glosary</li>
+              <li>In progress</li>
+            </ul>
+            <ul class="more-content">
+              <li>
+                This 1665-player contest boasts a $300,000.00 prize pool and
+                pays out the top 300 finishing positions. First place wins
+                $100,000.00. Good luck!
+                <p><a class="details-text project_name" href="">Details</a></p>
+              </li>
+            </ul>
+          </article> -->
+          <!-- </section> -->
+          <!-- Row 3 -->
+          <!-- <article class="row nfl">
+            <ul>
+              <li><a class="project_name" href="#">NHL</a></li>
+              <li><a class="link text-hover" href="#">Project Manager</a></li>
+              <li>Wilson && Wilson</li>
+              <li>Law</li>
+              <li>In progress</li>
+            </ul>
+            <ul class="more-content">
+              <li>
+                This 1665-player contest boasts a $300,000.00 prize pool and
+                pays out the top 300 finishing positions. First place wins
+                $100,000.00. Good luck!
+                <p><a class="details-text project_name" href="">Details</a></p>
+              </li>
+            </ul>
+          </article> -->
+          <!-- Row 4 -->
+          <!-- <article class="row mlb update-row">
+            <ul>
+              <li>
+                <a class="project_name" href="#">MLB</a
+                ><span class="small">(update)</span>
+              </li>
+              <li><a class="link text-hover" href="#">Project Manager</a></li>
+              <li>TechCult</li>
+              <li>Software Engineering</li>
+              <li>Plan</li>
+            </ul>
+            <ul class="more-content">
+              <li>
+                This 1665-player contest boasts a $300,000.00 prize pool and
+                pays out the top 300 finishing positions. First place wins
+                $100,000.00. Good luck!
+                <p><a class="details-text project_name" href="">Details</a></p>
+              </li>
+            </ul>
+          </article> -->
+          <!-- Row 5 -->
+          <!-- <article class="row nhl">
+            <ul>
+              <li><a class="project_name" href="#">MLB</a></li>
+              <li><a class="link text-hover" href="#">Project Manager</a></li>
+              <li>Vogue</li>
+              <li>Style</li>
+              <li>Done</li>
+            </ul>
+            <ul class="more-content">
+              <li>
+                This 1665-player contest boasts a $300,000.00 prize pool and
+                pays out the top 300 finishing positions. First place wins
+                $100,000.00. Good luck!
+                <p><a class="details-text project_name" href="">Details</a></p>
+              </li>
+            </ul>
+          </article> -->
+          <!-- Row 6 -->
+          <!-- <article class="row nhl">
+            <ul>
+              <li><a class="project_name" href="#">NHL</a></li>
+              <li><a class="link text-hover" href="#">Project Manager</a></li>
+              <li>Wilson && Wilson</li>
+              <li>Law</li>
+              <li>Done</li>
+            </ul>
+            <ul class="more-content">
+              <li>
+                This 1665-player contest boasts a $300,000.00 prize pool and
+                pays out the top 300 finishing positions. First place wins
+                $100,000.00. Good luck!
+                <p><a class="details-text project_name" href="">Details</a></p>
+              </li>
+            </ul>
+          </article> -->
+          <!-- Row 7 -->
+          <!-- <article class="row pga">
+            <ul>
+              <li><a class="project_name" href="#">NHL</a></li>
+              <li><a class="link text-hover" href="#">Project Manager</a></li>
+              <li>MedicineCO</li>
+              <li>Medicine</li>
+              <li>In progress</li>
+            </ul>
+            <ul class="more-content">
+              <li>
+                This 1665-player contest boasts a $300,000.00 prize pool and
+                pays out the top 300 finishing positions. First place wins
+                $100,000.00. Good luck!
+                <p><a class="details-text project_name" href="">Details</a></p>
+              </li>
+            </ul>
+          </article> -->
+
+          <!-- <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Done</th>
+                <th>In progress</th>
+                <th>Planned</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >The Lord of the Rings: The Two Towers</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+              </tr>
+              <tr class="active-row">
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >The Lord of the Rings: The Two Towers</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+              </tr>
+              <tr class="active-row">
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >The Lord of the Rings: The Two Towers</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+              </tr>
+              <tr class="active-row">
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >The Lord of the Rings: The Two Towers</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+              </tr>
+              <tr class="active-row">
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >The Lord of the Rings: The Two Towers</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+              </tr>
+              <tr class="active-row">
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >The Lord of the Rings: The Two Towers</a
+                  >
+                </td>
+                <td>
+                  <a class="link table_text" href="#"
+                    >Anchorman: The Legend of Ron Burgundy</a
+                  >
+                </td>
+              </tr> -->
+          <!-- and so on... -->
+          <!-- </tbody>
+          </table> -->
+        </div>
+      </section>
+    </main>
+
+    <!-- <script type="module" src="/main.js"></script> -->
+  </body>
+</html>

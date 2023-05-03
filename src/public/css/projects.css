@@ -1,0 +1,213 @@
+/* .project_container {
+  display: flex;
+  justify-content: center;
+}
+
+.styled-table {
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  background-color: var(--accent-color);
+  color: var(--white-color);
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 15px 20px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid var(--modal-bg-color);
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: var(--secondary-bg-color);
+}
+
+.table_text {
+  transition: color var(--trans-descrp);
+}
+
+.table_text:hover,
+.table_text:focus {
+  color: var(--accent-color);
+} */
+
+/* links */
+.nfl .project_name,
+.mlb .project_name,
+.nhl .project_name,
+.pga .project_name {
+  text-decoration: none;
+  transition: color 0.25s ease-out;
+}
+.nfl .project_name {
+  color: var(--accent-color);
+}
+.nfl .project_name:hover {
+  color: darken(var(--accent-color), 20%);
+}
+.mlb .project_name {
+  color: var(--green);
+}
+.mlb .project_name:hover {
+  color: darken(var(--green), 20%);
+}
+.nhl .project_name {
+  color: var(--yellow);
+}
+.nhl .project_name:hover {
+  color: darken(var(--yellow), 20%);
+}
+.pga .project_name {
+  color: var(--orange);
+}
+.pga .project_name:hover {
+  color: darken(var(--orange), 20%);
+}
+
+/* wrapper */
+.wrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0px auto 100px auto;
+  color: var(--projects-text);
+  overflow: hidden;
+  position: relative;
+}
+
+/* lists */
+.row ul {
+  margin: 0;
+  padding: 0;
+}
+.row ul li {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+  list-style: none;
+  display: inline-block;
+  width: 20%;
+  box-sizing: border-box;
+  @media only screen and (max-width: 767px) and (min-width: 480px) {
+    font-size: 13px;
+  }
+  @media only screen and (max-width: 479px) {
+    font-size: 13px;
+  }
+}
+
+.title ul li {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 20px 13px;
+}
+.row ul li {
+  padding: 5px 15px;
+}
+
+/* rows */
+.row {
+  padding: 20px 0;
+  height: 50px;
+  font-size: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease-out;
+}
+.row:hover {
+  height: 160px;
+  @media only screen and (max-width: 767px) {
+    height: 160px;
+  }
+  @media only screen and (max-width: 359px) {
+    height: 105px;
+  }
+}
+.title {
+  padding: 25px 0 5px 0;
+  height: 50px;
+  font-size: 0;
+}
+.title:hover {
+  height: 45px;
+}
+
+.title-hide {
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.nfl {
+  border-left: 3px solid darken(var(--accent-color), 30%);
+}
+.nfl:hover {
+  border-left: 3px solid var(--accent-color);
+}
+.mlb {
+  border-left: 3px solid darken(var(--green), 30%);
+}
+.mlb:hover {
+  border-left: 3px solid var(--green);
+}
+.nhl {
+  border-left: 3px solid darken(var(--yellow), 30%);
+}
+.nhl:hover {
+  border-left: 3px solid var(--yellow);
+}
+.pga {
+  border-left: 3px solid darken(var(--orange), 30%);
+}
+.pga:hover {
+  border-left: 3px solid var(--orange);
+}
+
+/* more content */
+ul.more-content .more_content_desc {
+  position: relative;
+  top: 10px;
+  font-size: 13px;
+  margin: 0;
+  padding: 0px 13px;
+  display: block;
+  height: 50px;
+  width: 100%;
+  color: darken(var(--projects-text), 50%);
+  @media only screen and (max-width: 767px) {
+    font-size: 11px;
+  }
+}
+
+.details-text {
+  margin-top: 5px;
+}
+
+/* small content */
+.small {
+  color: darken(var(--projects-text), 60%);
+  font-size: 10px;
+  padding: 0 10px;
+  margin: 0;
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.team_members_project {
+  display: flex;
+}
+
+.team_members_project {
+  font-size: 16px;
+  margin: 0;
+  padding: 0px 13px;
+  padding-left: 0px;
+}

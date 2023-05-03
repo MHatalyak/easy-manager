@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../parts/head'); %>
+    <script src="https://balkan.app/js/OrgChart.js"></script>
+    <!-- <link
+      rel="stylesheet"
+      href="https://balkangraph.com/js/latest/css/orgchart.css"
+    /> -->
+  </head>
+  <body>
+    <header class="header"><%- include('../parts/header'); %></header>
+    <!-- <div style="height: 500px; overflow-y: auto"><div id="tree"></div></div>
+    
+    <!-- <div id="chartDiv"></div> -->
+    <div id="tree"></div>
+    <script>
+      var detailsIcon =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16" id="more"><path fill="#ffffff" d="M4,6.75 C4.69036,6.75 5.25,7.30964 5.25,8 C5.25,8.69036 4.69036,9.25 4,9.25 C3.30964,9.25 2.75,8.69036 2.75,8 C2.75,7.30964 3.30964,6.75 4,6.75 Z M8,6.75 C8.69036,6.75 9.25,7.30964 9.25,8 C9.25,8.69036 8.69036,9.25 8,9.25 C7.30964,9.25 6.75,8.69036 6.75,8 C6.75,7.30964 7.30964,6.75 8,6.75 Z M12,6.75 C12.6904,6.75 13.25,7.30964 13.25,8 C13.25,8.69036 12.6904,9.25 12,9.25 C11.3096,9.25 10.75,8.69036 10.75,8 C10.75,7.30964 11.3096,6.75 12,6.75 Z"/></svg>';
+      // import OrgChart from 'orgchart';
+      window.onload = function () {
+        OrgChart.SEARCH_PLACEHOLDER = 'Search';
+        var chart = new OrgChart(document.getElementById('tree'), {
+          template: 'polina',
+          layout: OrgChart.mixed,
+          menu: {
+            pdf: {
+              text: 'Export PDF',
+            },
+            png: {
+              text: 'Export PNG',
+            },
+            svg: {
+              text: 'Export SVG',
+            },
+            csv: {
+              text: 'Export CSV',
+            },
+          },
+          enableSearch: true,
+          nodeMouseClick: OrgChart.action.details,
+          editForm: {
+            readOnly: true,
+            buttons: {
+              details: {
+                icon: detailsIcon,
+                text: 'Details',
+                onClick: function (sender, args) {
+                  var data = chart.get(args.node.id);
+                  window.location.href = '/profile/' + data.name; // replace '/profile/' with your desired URL path
+                },
+              },
+            },
+            // generateElementsFromFields: false,
+            elements: [
+              { type: 'textbox', label: 'Full Name', binding: 'name' },
+              { type: 'textbox', label: 'Job Title', binding: 'title' },
+              { type: 'textbox', label: 'Email', binding: 'email' },
+              { type: 'textbox', label: 'Photo Url', binding: 'img' },
+            ],
+          },
+
+          nodeBinding: {
+            field_0: 'name',
+            field_1: 'title',
+            field_2: 'email',
+            img_0: 'img',
+          },
+          toolbar: { fit: true },
+
+          nodes: JSON.parse('<%- JSON.stringify(nodes) %>'),
+        });
+        chart.editUI.on('button-click', function (sender, args) {
+          if (args.name == 'details') {
+            var data = chart.get(args.nodeId);
+            window.location.href = '/profile/' + data.name;
+          }
+        });
+      };
+    </script>
+
+    <!-- <script src="chart.js"></script> -->
+    <!-- <script src="custom_js/template.js" type="module"></script> -->
+  </body>
+</html>

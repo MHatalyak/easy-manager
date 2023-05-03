@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../parts/head'); %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  </head>
+  <body>
+    <header class="header"><%- include('../parts/header'); %></header>
+    <main>
+      <section class="profile-section sections-padding">
+        <div class="container profile-container">
+          <div class="left">
+            <img
+              class="profile-img"
+              src="<%= employee.img %>"
+              alt="user"
+              width="350"
+              height="150"
+            />
+            <!-- <h4>Alex William</h4>
+            <p>UI Developer</p>
+          </div>
+          <div class="right">
+            <div class="projects">
+              <h3>Contact Information</h3>
+              <div class="projects_data">
+                <div class="data">
+                  <h4>Email</h4>
+                  <p>alex@gmail.com</p>
+                </div>
+                <div class="data">
+                  <h4>Phone</h4>
+                  <p>0001-213-998761</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="projects">
+              <h3>Projects</h3>
+              <div class="projects_data">
+                <div class="data">
+                  <h4>Recent</h4>
+                  <p>Lorem ipsum dolor sit amet.</p>
+                </div>
+                <div class="data">
+                  <h4>Recent</h4>
+                  <p>dolor sit amet.</p>
+                </div>
+              </div>
+            </div> -->
+            <h4><%= employee.name %></h4>
+            <p><%= employee.title %></p>
+          </div>
+
+          <div class="right">
+            <div class="projects">
+              <h3>Contact Information</h3>
+              <div class="projects_data">
+                <div class="data">
+                  <h4>Email</h4>
+                  <p>
+                    <a
+                      class="details-text link text-hover"
+                      href="mailto:<%= employee.email %>"
+                      ><%= employee.email %></a
+                    >
+                  </p>
+                  <!-- Render the employee email from the fetched data -->
+                </div>
+                <div class="data">
+                  <h4>Phone</h4>
+                  <p>
+                    <a
+                      class="details-text link text-hover"
+                      href="tel:+<%= employee.phone %>"
+                      ><%= employee.phone %></a
+                    >
+                  </p>
+                  <!-- Render the employee phone number from the fetched data -->
+                </div>
+              </div>
+            </div>
+
+            <div class="projects">
+              <h3>Projects</h3>
+              <div class="projects_data">
+                <div class="data">
+                  <h4>Recent</h4>
+                  <p><%= employee.recent_project %></p>
+                  <!-- Render the employee's recent project from the fetched data -->
+                </div>
+                <div class="data">
+                  <h4>Previous</h4>
+                  <p><%= employee.previous_project %></p>
+                  <!-- Render the employee's previous project from the fetched data -->
+                </div>
+              </div>
+            </div>
+
+            <div class="projects">
+              <h3>Technologies</h3>
+              <div class="projects_data">
+                <div class="chart-content">
+                  <!-- pie chart entries -->
+                  <!-- <div class="pie-wrap">
+                    <div class="light-yellow entry">
+                      <p>45%</p>
+                      <p class="entry-value">Rice</p>
+                    </div>
+                    <div class="sky-blue entry">
+                      <p>15%</p>
+                      <p class="entry-value">Pasta%</p>
+                    </div>
+                    <div class="pink entry">
+                      <p>12.5%</p>
+                      <p class="entry-value">Beans</p>
+                    </div>
+                    <div class="purple entry">
+                      <p>12.5%</p>
+                      <p class="entry-value">Plantain</p>
+                    </div>
+                    <div class="green entry">
+                      <p>10%</p>
+                      <p class="entry-value">Potato</p>
+                    </div>
+                    <div class="wheat entry">
+                      <p>5%</p>
+                      <p class="entry-value">Yam</p>
+                    </div> -->
+                  <!-- <div class="bright-purple entry">
+                      <p>8%</p>
+                      <p class="entry-value">Yam</p>
+                    </div> -->
+                  <!-- </div> -->
+
+                  <!-- <div class="key-wrap"> -->
+                  <!--Pie chart keys  -->
+                  <!-- <input
+                      type="radio"
+                      id="rice"
+                      name="values"
+                      class="rice-key"
+                    />
+                    <label for="rice" class="rice-label label">Rice</label>
+
+                    <input
+                      type="radio"
+                      name="values"
+                      id="beans"
+                      class="beans-key"
+                    />
+                    <label for="beans" class="beans-label label"> Beans</label>
+
+                    <input
+                      type="radio"
+                      name="values"
+                      id="plantain"
+                      class="plantain-key"
+                    />
+                    <label for="plantain" class="plantain-label label">
+                      Plantain</label
+                    >
+
+                    <input
+                      type="radio"
+                      name="values"
+                      id="potato"
+                      class="potato-key"
+                    />
+                    <label for="potato" class="potato-label label">
+                      Potato</label
+                    >
+
+                    <input
+                      type="radio"
+                      name="values"
+                      id="yam"
+                      class="yam-key"
+                    />
+                    <label for="yam" class="yam-label label"> Yam</label>
+
+                    <input
+                      type="radio"
+                      name="values"
+                      id="pasta"
+                      class="pasta-key"
+                    />
+                    <label for="pasta" class="pasta-label label"> Pasta</label>
+                  </div> -->
+
+                  <canvas
+                    id="myChart"
+                    style="width: 100%; max-width: 900px"
+                  ></canvas>
+                  <script>
+                    var xValues = [
+                      'NodeJS',
+                      'C#',
+                      'Angular',
+                      'Java',
+                      'C++',
+                      'BootStrap',
+                      'Figma',
+                    ];
+
+                    const percentages = JSON.parse(
+                      '<%= technologyChart.percentages %>'
+                    );
+
+                    var barColors = [
+                      '#404bbf',
+                      '#555db9',
+                      '#8690f4',
+                      '#3d4387',
+                      '#8690f4',
+                      '#555db9',
+                      '#404bbf',
+                    ];
+                    // const ctx = document
+                    //   .getElementById('technology-chart')
+                    //   .getContext('2d');
+                    const chart = new Chart('myChart', {
+                      type: 'doughnut',
+                      data: {
+                        labels: xValues,
+                        datasets: [
+                          {
+                            data: percentages,
+                            backgroundColor: barColors,
+                          },
+                        ],
+                      },
+                      options: {
+                        legend: {
+                          display: true,
+                          position: 'right',
+                        },
+                      },
+                    });
+                  </script>
+                  <!-- <script>
+                    var xValues = [
+                      'Italy',
+                      'France',
+                      'Spain',
+                      'USA',
+                      'Argentina',
+                    ];
+                    var yValues = [55, 49, 44, 24, 15];
+                    var barColors = [
+                      '#b91d47',
+                      '#00aba9',
+                      '#2b5797',
+                      '#e8c3b9',
+                      '#1e7145',
+                    ];
+
+                    new Chart('myChart', {
+                      type: 'pie',
+                      data: {
+                        labels: xValues,
+                        datasets: [
+                          {
+                            backgroundColor: barColors,
+                            data: yValues,
+                          },
+                        ],
+                      },
+                      // options: {
+                      //   title: {
+                      //     display: true,
+                      //     text: 'World Wide Wine Production 2018',
+                      //   },
+                      // },
+                    });
+                  </script> -->
+                  <!-- <script>
+                    const employeeName = '<%= employee.name %>';
+                    const url = `/profile/${employeeName}`;
+                    console.log('url:', url);
+                    fetch(url)
+                      .then(response => {
+                        if (!response.ok) {
+                          throw new Error(response.statusText);
+                        }
+                        return response.json();
+                      })
+                      .then(employeeData => {
+                        console.log('employeeData:', employeeData);
+                        const techData = employeeData.technologies;
+                        console.log('techData:', techData);
+                        const xValues = techData.map(data => data.name);
+                        const yValues = techData.map(data => data.percentage);
+                        const barColors = techData.map(data => data.color);
+
+                        // .catch(error => console.error(error));
+
+                        new Chart('myChart', {
+                          type: 'pie',
+                          data: {
+                            labels: xValues,
+                            datasets: [
+                              {
+                                backgroundColor: barColors,
+                                data: yValues,
+                              },
+                            ],
+                          },
+                        });
+                      })
+                      .catch(error => console.error(error));
+                  </script> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="projects">
+              <h3>Social Media</h3>
+              <div class="projects_data social_media">
+                <ul class="socials-links-list sections-list list">
+                  <li class="socials-links-item">
+                    <a
+                      href="https://gmail.com"
+                      rel="noopener noreferrer"
+                      class="socials-links profile-links-size"
+                    >
+                      <svg class="socials-icon" width="16" height="16">
+                        <use href="./icons.svg#icon-mail"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials-links-item">
+                    <a
+                      href="https://facebook.com"
+                      rel="noopener noreferrer"
+                      class="socials-links profile-links-size"
+                    >
+                      <svg class="socials-icon" width="16" height="16">
+                        <use href="./icons.svg#icon-facebook"></use>
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="socials-links-item">
+                    <a
+                      href="https://linkedin.com"
+                      rel="noopener noreferrer"
+                      class="socials-links profile-links-size"
+                    >
+                      <svg class="socials-icon" width="16" height="16">
+                        <use href="./icons.svg#icon-linkedin"></use>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
+    <!-- <script src="/custom_js/pie_diagram.js"></script> -->
+    <!-- <script type="module" src="/main.js"></script> -->
+  </body>
+</html>
