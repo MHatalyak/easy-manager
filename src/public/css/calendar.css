@@ -38,3 +38,12 @@
 .fc .fc-button-primary:not(:disabled):hover {
   background-color: var(--accent-color);
 }
+
+.form-control {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
+}

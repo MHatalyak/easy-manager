@@ -362,10 +362,64 @@ server.get('/template', (req, res) => {
     .catch(error => console.error(error));
 });
 
-server.get('/calendar', (req, res) => {
-  res.render('pages/calendar', {
-    currentPage: 'calendar',
-  }); // Replace with the name of your EJS template file
+// server.get('/calendar', (req, res) => {
+//   res.render('pages/calendar', {
+//     currentPage: 'calendar',
+//   }); // Replace with the name of your EJS template file
+// });
+
+server.get('/calendar', async (req, res) => {
+  client
+    .query('SELECT * FROM events')
+    .then(result => {
+      const events = result.rows.map(row => ({
+        id: row.id !== undefined ? row.id : null,
+        groupId: row.groupId !== undefined ? row.groupId : null,
+        title: row.title,
+        start: row.start,
+        end: row.end !== undefined ? row.end : null,
+        url: row.url !== undefined ? row.url : null,
+      }));
+
+      res.render('pages/calendar', {
+        currentPage: 'calendar',
+        events: events,
+      });
+    })
+    .catch(error => console.error(error));
+});
+
+server.post('/events', async (req, res) => {
+  const { title, start, end } = req.body;
+
+  try {
+    const result = await client.query(
+      `
+      INSERT INTO events (title, "start", "end")
+      VALUES ($1, $2, $3)
+      RETURNING id;
+    `,
+      [title, start, end]
+    );
+
+    const id = result.rows[0].id;
+    res.status(201).json({ id });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Unable to create event' });
+  }
+});
+
+server.delete('/events/:id', async (req, res) => {
+  const eventId = req.params.id;
+
+  try {
+    await client.query('DELETE FROM events WHERE id = $1', [eventId]);
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 });
 
 // Start the server

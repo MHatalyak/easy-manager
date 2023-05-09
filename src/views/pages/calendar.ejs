@@ -3,9 +3,18 @@
   <head>
     <%- include('../parts/head'); %>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
+        var events = JSON.parse('<%- JSON.stringify(events) %>');
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
           initialDate: '2023-04-12',
@@ -14,58 +23,255 @@
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay',
           },
-
           navLinks: true, // can click day/week names to navigate views
+          selectable: true,
+          selectMirror: true,
+          select: function (arg) {
+            Swal.fire({
+              html: '<div class="mb-7">Create new event?</div><div class="fw-bold mb-5">Event Name:</div><input type="text" class="form-control" name="event_name" <div class="fw-bold mb-5">Start Time:</div><input type="datetime-local" class="form-control" name="start_time" /><div class="fw-bold mb-5">End Time:</div><input type="datetime-local" class="form-control" name="end_time"/>',
+              icon: 'info',
+              showCancelButton: true,
+              buttonsStyling: false,
+              confirmButtonText: 'Yes, create it!',
+              cancelButtonText: 'No, return',
+              customClass: {
+                confirmButton: 'btn btn-primary hero-btn',
+                cancelButton: 'btn btn-active-light hero-btn',
+              },
+            }).then(function (result) {
+              if (result.value) {
+                var title = document.querySelector(
+                  'input[name="event_name"]'
+                ).value;
+                var start = document.querySelector(
+                  'input[name="start_time"]'
+                ).value;
+                var end = document.querySelector(
+                  'input[name="end_time"]'
+                ).value;
+
+                // If start time is not set, set it to midnight
+                if (!start) {
+                  start = moment(arg.start)
+                    .startOf('day')
+                    .format('YYYY-MM-DDTHH:mm:ss');
+                }
+
+                // If end time is not set, set it to midnight
+                if (!end) {
+                  end = moment(arg.end)
+                    .startOf('day')
+                    .format('YYYY-MM-DDTHH:mm:ss');
+                }
+
+                if (title) {
+                  var data = {
+                    title: title,
+                    start: start,
+                    end: end,
+                  };
+
+                  fetch('/events', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                  })
+                    .then(response => response.json())
+                    .then(data => {
+                      // Reload the calendar to display the new event
+                      calendar.refetchEvents();
+                    })
+                    .catch(error => console.error(error));
+                }
+                calendar.unselect();
+              } else if (result.dismiss === 'cancel') {
+                Swal.fire({
+                  text: 'Event creation was declined!.',
+                  icon: 'error',
+                  buttonsStyling: false,
+                  confirmButtonText: 'Ok, got it!',
+                  customClass: {
+                    confirmButton: 'btn btn-primary hero-btn',
+                  },
+                });
+              }
+            });
+          },
+
+          // Delete event
+          eventClick: function (arg) {
+            event.preventDefault();
+            Swal.fire({
+              text: 'Are you sure you want to delete this event?',
+              icon: 'warning',
+              showCancelButton: true,
+              buttonsStyling: false,
+              confirmButtonText: 'Yes, delete it!',
+              cancelButtonText: 'No, return',
+              customClass: {
+                confirmButton: 'btn btn-primary hero-btn',
+                cancelButton: 'btn btn-active-light hero-btn',
+              },
+            }).then(function (result) {
+              if (result.value) {
+                // send a request to delete the event from the database
+                fetch(`/events/${arg.event.id}`, {
+                  method: 'DELETE',
+                })
+                  .then(response => {
+                    if (response.ok) {
+                      // if the request is successful, remove the event from the calendar
+                      arg.event.remove();
+                      Swal.fire({
+                        text: 'Event deleted!',
+                        icon: 'success',
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ok, got it!',
+                        customClass: {
+                          confirmButton: 'btn btn-primary hero-btn',
+                        },
+                      });
+                    } else {
+                      throw new Error('Network response was not ok');
+                    }
+                  })
+                  .catch(error => {
+                    console.error(
+                      'There was a problem with the fetch operation:',
+                      error
+                    );
+                    Swal.fire({
+                      text: 'There was a problem deleting the event. Please try again later.',
+                      icon: 'error',
+                      buttonsStyling: false,
+                      confirmButtonText: 'Ok, got it!',
+                      customClass: {
+                        confirmButton: 'btn btn-primary hero-btn',
+                      },
+                    });
+                  });
+              } else if (result.dismiss === 'cancel') {
+                Swal.fire({
+                  text: 'Event was not deleted!.',
+                  icon: 'error',
+                  buttonsStyling: false,
+                  confirmButtonText: 'Ok, got it!',
+                  customClass: {
+                    confirmButton: 'btn btn-primary hero-btn',
+                  },
+                });
+              }
+            });
+          },
+
           editable: true,
+          dayMaxEvents: true,
           // allow "more" link when too many
-          events: [
-            {
-              title: 'All Day Event',
-              start: '2023-04-01',
-            },
-            {
-              title: 'Long Event',
-              start: '2023-04-07',
-              end: '2023-04-10',
-            },
-            {
-              groupId: '999',
-              title: 'Repeating Event',
-              start: '2023-04-09T16:00:00',
-            },
-            {
-              groupId: '999',
-              title: 'Repeating Event',
-              start: '2023-04-16T16:00:00',
-            },
-            {
-              title: 'Conference',
-              start: '2023-04-11',
-              end: '2023-04-13',
-            },
-            {
-              title: 'Meeting',
-              start: '2023-04-12T10:30:00',
-              end: '2023-04-12T12:30:00',
-            },
-            {
-              title: 'Lunch',
-              start: '2023-04-12T12:00:00',
-            },
-            {
-              title: 'Meeting',
-              start: '2023-04-12T14:30:00',
-            },
-            {
-              title: 'Birthday Party',
-              start: '2023-04-13T07:00:00',
-            },
-            {
-              title: 'Click for Google',
-              url: 'http://google.com/',
-              start: '2023-04-28',
-            },
-          ],
+          //   events: [
+          //     {
+          //       title: 'All Day Event',
+          //       start: '2023-04-01',
+          //     },
+          //     {
+          //       title: 'Long Event',
+          //       start: '2023-04-07',
+          //       end: '2023-04-10',
+          //     },
+          //     {
+          //       groupId: '999',
+          //       title: 'Repeating Event',
+          //       start: '2023-04-09T16:00:00',
+          //     },
+          //     {
+          //       groupId: '999',
+          //       title: 'Repeating Event',
+          //       start: '2023-04-16T16:00:00',
+          //     },
+          //     {
+          //       title: 'Conference',
+          //       start: '2023-04-11',
+          //       end: '2023-04-13',
+          //     },
+          //     {
+          //       groupId: '999',
+          //       title: 'Repeating Event',
+          //       start: '2023-04-12T16:00:00',
+          //     },
+          //     {
+          //       title: 'Meeting',
+          //       start: '2023-04-12T10:30:00',
+          //       end: '2023-04-12T12:30:00',
+          //     },
+          //     {
+          //       title: 'Lunch',
+          //       start: '2023-04-12T12:00:00',
+          //     },
+          //     {
+          //       title: 'Meeting',
+          //       start: '2023-04-12T14:30:00',
+          //     },
+          //     {
+          //       title: 'Birthday Party',
+          //       start: '2023-04-13T07:00:00',
+          //     },
+          //     {
+          //       title: 'Birthday Party',
+          //       start: '2023-04-12T10:00:00',
+          //     },
+          //     {
+          //       title: 'Click for Google',
+          //       url: 'http://google.com/',
+          //       start: '2023-04-28',
+          //     },
+          //     {
+          //       title: 'All Day Event',
+          //       start: '2023-05-01',
+          //     },
+          //     {
+          //       title: 'Long Event',
+          //       start: '2023-05-07',
+          //       end: '2023-05-10',
+          //     },
+          //     {
+          //       groupId: '999',
+          //       title: 'Repeating Event',
+          //       start: '2023-05-09T16:00:00',
+          //     },
+          //     {
+          //       groupId: '999',
+          //       title: 'Repeating Event',
+          //       start: '2023-05-16T16:00:00',
+          //     },
+          //     {
+          //       title: 'Conference',
+          //       start: '2023-05-11',
+          //       end: '2023-05-13',
+          //     },
+          //     {
+          //       title: 'Lunch',
+          //       start: '2023-05-12T12:00:00',
+          //     },
+          //     {
+          //       title: 'Meeting',
+          //       start: '2023-05-12T14:30:00',
+          //     },
+          //     {
+          //       title: 'Birthday Party',
+          //       start: '2023-05-13T07:00:00',
+          //     },
+          //     {
+          //       title: 'Conference',
+          //       start: '2023-05-16',
+          //       end: '2023-05-17',
+          //     },
+          //     {
+          //       title: 'Lunch',
+          //       start: '2023-05-19T12:00:00',
+          //     },
+          //   ],
+          events: events,
           eventColor: '#4d5ae5',
           //   eventClick: function (info) {
           //     swal({

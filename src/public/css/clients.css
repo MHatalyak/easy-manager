@@ -1,3 +1,8 @@
+.client-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
 .section3-item {
   background: var(--white-color);
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.008),
@@ -27,6 +32,7 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
+  column-gap: 20px;
 }
 
 .socials-links {
@@ -63,6 +69,6 @@
     padding-bottom: 120px;
   }
   .section3-item {
-    width: calc((100% - 72px) / 6);
+    width: calc((100% - 64px) / 6);
   }
 }
